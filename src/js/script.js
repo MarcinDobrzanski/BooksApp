@@ -10,6 +10,9 @@
     containerOf: {
       booksList: '.books-list',
     },
+    book: {
+      bookImage: '.book__image',
+    },
   };
 
   console.log('select', select);
@@ -20,7 +23,7 @@
   };
 
   function render() {
-    
+
     const booksHTML = document.querySelector(select.containerOf.booksList);
 
     console.log('booksHTML', booksHTML);
@@ -41,5 +44,25 @@
 
   }
   render();
+
+  function initActions() {
+
+    const favoriteBooks = [];
+    console.log({ favoriteBooks });
+
+    const allBooks = document.querySelectorAll(select.book.bookImage);
+    console.log({ allBooks });
+
+    for (let book of allBooks) {
+      book.addEventListener('dblclick', function (event) {
+        event.preventDefault();
+        favoriteBooks.push(book);
+      });
+    }
+
+
+  }
+  initActions();
+
 
 }
