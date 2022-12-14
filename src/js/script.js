@@ -55,12 +55,12 @@
   function initActions() {
 
     const allBooks = document.querySelectorAll(select.book.bookImage);
+    allBooks.addEventListener('dblclick', function (event) {
+      event.preventDefault();
 
-    for (let book of allBooks) {
-      const bookId = book.getAttribute(select.book.bookId);
+      for (let book of allBooks) {
+        const bookId = book.getAttribute(select.book.bookId);
 
-      book.addEventListener('dblclick', function (event) {
-        event.preventDefault();
         if (!favoriteBooks.includes(bookId)) {
           book.classList.add(classNames.booksList.bookFavorite);
           favoriteBooks.push(bookId);
@@ -70,8 +70,8 @@
           book.classList.remove(classNames.booksList.bookFavorite);
         }
 
-      });
-    }
+      }
+    });
 
   }
   initActions();
