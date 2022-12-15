@@ -116,11 +116,16 @@
 
     const formFilters = document.querySelector(select.filters.filtersWrapper);
     console.log({ formFilters });
-    // const formInput = document.querySelectorAll(select.filters.input);
+    // const formInput = document.querySelectorAll(select.filters.inputForm);
     // const inPutValue = formInput.getAttribute(select.filters.value);
 
     formFilters.addEventListener('click', function (event) {
-      if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox' && event.target.name === 'filter') {
+      if (filters.includes(event.target.value)) {
+        console.log('Nie ', event.target.value);
+        const removeFilter = filters.indexOf(event.target.value);
+        filters.splice(removeFilter, 1);
+
+      } else if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox' && event.target.name === 'filter') {
         console.log('List item ', event.target.value);
         filters.push(event.target.value);
       }
