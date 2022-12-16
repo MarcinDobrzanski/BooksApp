@@ -13,6 +13,7 @@
     book: {
       bookImage: '.book__image',
       bookId: 'data-id',
+      book: 'book',
     },
     filters: {
       filtersWrapper: '.filters div',
@@ -24,7 +25,7 @@
   const classNames = {
     booksList: {
       bookFavorite: 'favorite',
-
+      hidden: 'hidden',
     },
   };
 
@@ -73,11 +74,11 @@
       if (event.target.offsetParent.classList.contains('book__image') && favoriteBooks.includes(event.target.offsetParent.attributes[2].value)) {
         const removeBook = favoriteBooks.indexOf(event.target.offsetParent.attributes[2].value);
         favoriteBooks.splice(removeBook, 1);
-        event.target.offsetParent.classList.remove('favorite');
+        event.target.offsetParent.classList.remove(classNames.booksList.bookFavorite);
 
 
       } else if (event.target.offsetParent.classList.contains('book__image') && !favoriteBooks.includes(event.target.offsetParent.attributes[2].value)) {
-        event.target.offsetParent.classList.add('favorite');
+        event.target.offsetParent.classList.add(classNames.booksList.bookFavorite);
         favoriteBooks.push(event.target.offsetParent.attributes[2].value);
       }
 
@@ -98,6 +99,8 @@
         filters.push(event.target.value);
       }
       console.log({ filters });
+
+      filterBooks();
     });
 
     console.log('favoriteBooks', favoriteBooks);
@@ -108,6 +111,25 @@
 
   }
   initActions();
+
+
+  function filterBooks() {
+    const allBooks = document.querySelectorAll(select.book.bookImage);
+
+
+    let shouldBeHidden = false;
+
+    for (let book of dataSource.books) {
+      for (const filter of filters) {
+        if (!book.details[filter]) {
+          shouldBeHidden = true;
+          break;
+        } 
+      }
+    }
+
+
+  }
 
 
 
