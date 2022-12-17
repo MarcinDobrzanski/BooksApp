@@ -123,12 +123,17 @@
       for (const filter of filters) {
         if (!book.details[filter]) {
           shouldBeHidden = true;
+          console.log({ book });
+          for (const bookId of allBooks) {
+            if (shouldBeHidden === true && bookId.attributes[2].value == book.id) {
+              console.log('bookId', bookId);
+              bookId.classList.add(classNames.booksList.hidden);
+            }
+          }
           break;
-        } 
+        }
       }
     }
-
-
   }
 
 
