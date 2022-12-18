@@ -114,28 +114,28 @@
 
 
   function filterBooks() {
-    const allBooks = document.querySelectorAll(select.book.bookImage);
+    // const allBooks = document.querySelectorAll(select.book.bookImage);
 
-
-    let shouldBeHidden = false;
 
     for (let book of dataSource.books) {
+      let shouldBeHidden = false;
+      const correctId = document.querySelector('.book__image[data-id="' + book.id + '"]');
       for (const filter of filters) {
+        console.log({filter});
         if (!book.details[filter]) {
           shouldBeHidden = true;
           console.log({ book });
-          for (const bookId of allBooks) {
-            if (shouldBeHidden === true && bookId.attributes[2].value == book.id) {
-              console.log('bookId', bookId);
-              bookId.classList.add(classNames.booksList.hidden);
-            }
-          }
           break;
         }
       }
+      if (shouldBeHidden === true) {
+        correctId.classList.add(classNames.booksList.hidden);
+      } else {
+        console.log({correctId});
+        correctId.classList.remove(classNames.booksList.hidden);
+      }
     }
   }
-
 
 
 }
