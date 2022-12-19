@@ -37,7 +37,13 @@
   const favoriteBooks = [];
   const filters = [];
 
+  
 
+
+  function determineRatingBgc(rating) {
+
+
+  }
 
 
 
@@ -53,6 +59,8 @@
 
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
 
+      const ratingBgc = rating;
+
 
       const booksContainer = document.querySelector(select.containerOf.booksList);
 
@@ -62,6 +70,9 @@
 
   }
   render();
+
+
+
 
   function initActions() {
 
@@ -121,7 +132,7 @@
       let shouldBeHidden = false;
       const correctId = document.querySelector('.book__image[data-id="' + book.id + '"]');
       for (const filter of filters) {
-        console.log({filter});
+        console.log({ filter });
         if (!book.details[filter]) {
           shouldBeHidden = true;
           console.log({ book });
@@ -131,7 +142,7 @@
       if (shouldBeHidden === true) {
         correctId.classList.add(classNames.booksList.hidden);
       } else {
-        console.log({correctId});
+        console.log({ correctId });
         correctId.classList.remove(classNames.booksList.hidden);
       }
     }
