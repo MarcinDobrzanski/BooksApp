@@ -6,6 +6,7 @@
   const select = {
     templateOf: {
       booksList: '#template-book',
+      ratingStyle: 'style',
     },
     containerOf: {
       booksList: '.books-list',
@@ -34,6 +35,7 @@
 
   const templates = {
     booksList: Handlebars.compile(document.querySelector(select.templateOf.booksList).innerHTML),
+    // ratingStyle: Handlebars.compile(document.querySelector(select.templateOf.ratingStyle).innerHTML),
 
   };
 
@@ -49,13 +51,13 @@
     let bgcCalRating = '';
 
     if (rating < 6) {
-      bgcCalRating = 'background: linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';
+      bgcCalRating = 'linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';
     } else if (rating > 6 && rating <= 8) {
-      bgcCalRating = 'background: linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';
+      bgcCalRating = 'linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';
     } else if (rating > 8 && rating <= 9) {
-      bgcCalRating = 'background: linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';
+      bgcCalRating = 'linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';
     } else if (rating > 9) {
-      bgcCalRating = 'background: linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';
+      bgcCalRating = 'linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';
     }
 
     return bgcCalRating;
@@ -71,19 +73,24 @@
 
     for (let book of dataSource.books) {
 
-      const generatedHTML = templates.booksList(book);
-
-      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-
       const ratingBgc = determineRatingBgc(book.rating);
       console.log({ ratingBgc });
 
+      const ratingWidth = (book.rating / 10) * 100;
+      console.log({ ratingWidth });
 
+      book.ratingBgc = ratingBgc;
+      book.ratingWidth = ratingWidth;
+
+      const generatedHTML = templates.booksList(book);
+
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
 
       const booksContainer = document.querySelector(select.containerOf.booksList);
 
 
       booksContainer.appendChild(generatedDOM);
+
     }
 
   }
