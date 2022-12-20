@@ -20,6 +20,9 @@
       inputForm: 'input',
       value: 'value',
     },
+    rating: {
+      bookRatingFill: '.book__rating .book__rating__fill',
+    }
   };
 
   const classNames = {
@@ -37,12 +40,25 @@
   const favoriteBooks = [];
   const filters = [];
 
-  
+
 
 
   function determineRatingBgc(rating) {
 
 
+    let bgcCalRating = '';
+
+    if (rating < 6) {
+      bgcCalRating = 'background: linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';
+    } else if (rating > 6 && rating <= 8) {
+      bgcCalRating = 'background: linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';
+    } else if (rating > 8 && rating <= 9) {
+      bgcCalRating = 'background: linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';
+    } else if (rating > 9) {
+      bgcCalRating = 'background: linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';
+    }
+
+    return bgcCalRating;
   }
 
 
@@ -59,7 +75,9 @@
 
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
 
-      const ratingBgc = rating;
+      const ratingBgc = determineRatingBgc(book.rating);
+      console.log({ ratingBgc });
+
 
 
       const booksContainer = document.querySelector(select.containerOf.booksList);
@@ -147,6 +165,9 @@
       }
     }
   }
+
+
+
 
 
 }
