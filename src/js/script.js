@@ -167,7 +167,6 @@
     }
 
     determineRatingBgc(rating) {
-      const thisBook = this;
 
       let bgcCalRating = '';
 
@@ -189,5 +188,6 @@
   }
 
   const app = new BooksList();
+  console.log(app);
 
 }
